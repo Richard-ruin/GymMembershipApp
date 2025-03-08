@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymMembershipApp.Views.MemberDetailPage"
+             Title="{Binding PageTitle}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Personal Information Section -->
+            <Frame BorderColor="LightGray" Padding="15" Margin="0,0,0,10">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Personal Information" 
+                           FontSize="18" 
+                           FontAttributes="Bold"/>
+
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="15">
+                        <Label Grid.Row="0" Grid.Column="0" Text="First Name:" VerticalOptions="Center"/>
+                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Member.FirstName}" 
+                               IsEnabled="{Binding IsEditable}" Placeholder="Enter first name"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Last Name:" VerticalOptions="Center"/>
+                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Member.LastName}" 
+                               IsEnabled="{Binding IsEditable}" Placeholder="Enter last name"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Email:" VerticalOptions="Center"/>
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Member.Email}" 
+                               IsEnabled="{Binding IsEditable}" Placeholder="Enter email"
+                               Keyboard="Email"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Phone:" VerticalOptions="Center"/>
+                        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Member.PhoneNumber}" 
+                               IsEnabled="{Binding IsEditable}" Placeholder="Enter phone number"
+                               Keyboard="Telephone"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Address:" VerticalOptions="Center"/>
+                        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Member.Address}" 
+                               IsEnabled="{Binding IsEditable}" Placeholder="Enter address"/>
+                    </Grid>
+
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Date of Birth:" />
+                        <DatePicker Date="{Binding Member.DateOfBirth}" 
+                                    IsEnabled="{Binding IsEditable}"
+                                    Format="yyyy-MM-dd"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Membership Information Section -->
+            <Frame BorderColor="LightGray" Padding="15" Margin="0,0,0,10">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Membership Information" 
+                           FontSize="18" 
+                           FontAttributes="Bold"/>
+
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="15">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Membership Type:" VerticalOptions="Center"/>
+                        <Picker Grid.Row="0" Grid.Column="1" 
+                                SelectedItem="{Binding Member.MembershipType}" 
+                                ItemsSource="{Binding MembershipTypes}"
+                                IsEnabled="{Binding IsEditable}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Join Date:" VerticalOptions="Center"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1" 
+                                    Date="{Binding Member.JoinDate}" 
+                                    IsEnabled="{Binding IsEditable}"
+                                    Format="yyyy-MM-dd"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Expiry Date:" VerticalOptions="Center"/>
+                        <DatePicker Grid.Row="2" Grid.Column="1" 
+                                    Date="{Binding Member.ExpiryDate}" 
+                                    IsEnabled="{Binding IsEditable}"
+                                    Format="yyyy-MM-dd"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Active Status:" VerticalOptions="Center"/>
+                        <Switch Grid.Row="3" Grid.Column="1" 
+                                IsToggled="{Binding Member.ActiveStatus}" 
+                                IsEnabled="{Binding IsEditable}"
+                                OnColor="Green"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <Button Text="Save" 
+                        Command="{Binding SaveCommand}"
+                        IsVisible="{Binding IsEditable}"
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        WidthRequest="100"/>
+
+                <Button Text="Cancel" 
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        WidthRequest="100"/>
+
+                <Button Text="Edit" 
+                        Command="{Binding EditCommand}"
+                        IsVisible="{Binding IsViewMode}"
+                        BackgroundColor="Orange"
+                        TextColor="White"
+                        WidthRequest="100"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
